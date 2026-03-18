@@ -16,20 +16,19 @@ class Plant:
 
 
 def main() -> None:
-    rose = Plant("Rose", 25, 30)
-    grow_days = 6
-    garden: list[Plant] = []
-    garden.append(rose)
+    week_days = 7
+    garden = [Plant("Rose", 25, 30)]
     print("=== Day 1 ===")
     for plant in garden:
         plant.get_info()
-        for _ in range(grow_days):
+    for plant in garden:
+        for _ in range(1, week_days):
             plant.grow(1)
             plant.age(1)
-    print(f"=== Day {1 + grow_days} ===")
+    print("=== Day 7 ===")
     for plant in garden:
         plant.get_info()
-    print(f"Growth this week: +{grow_days}cm")
+    print("Growth this week: +6cm")
 
 
 if __name__ == "__main__":

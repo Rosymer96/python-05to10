@@ -10,10 +10,8 @@ class Plant:
 
 
 def main() -> None:
-    garden: list[Plant] = []
-    garden.append(Plant("Rose", 25, 30))
-    garden.append(Plant("Sunflower", 80, 45))
-    garden.append(Plant("Cactus", 15, 120))
+    garden = [(Plant("Rose", 25, 30)), (Plant("Sunflower", 80, 45)),
+              (Plant("Cactus", 15, 120))]
     print("=== Garden Plant Registry ===")
     for plant in garden:
         plant.print_info()
