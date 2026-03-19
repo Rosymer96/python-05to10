@@ -34,6 +34,9 @@ class Flower(Plant):
 
     def bloom(self) -> None:
         print(f"{self._name} is blooming beautifully!")
+    
+    def act(self) -> None:
+        self.bloom()
 
 
 class Tree(Plant):
@@ -57,6 +60,9 @@ class Tree(Plant):
         print(f"{self._name} provides {self._shade} "
               f"square meters of shade")
 
+    def act(self) -> None:
+        self.produce_shade()
+
 
 class Vegetable(Plant):
     def __init__(
@@ -73,12 +79,10 @@ class Vegetable(Plant):
 
     def get_info(self) -> None:
         super().get_info()
-        print(f"{self._harvest_season} harvest\n{self._name} is rich in "
-              f"{self._nutritional_value}")
+        print(f"{self._harvest_season} harvest")
 
-
-def plant_factory(clss, *args, **kwargs) -> Plant:
-    return clss(*args, **kwargs)
+    def act(self) -> None:
+        print(f"{self._name} is rich in {self._nutritional_value}")
 
 
 def main() -> None:
@@ -93,10 +97,7 @@ def main() -> None:
     print("=== Garden Plant Types ===\n")
     for plant in garden:
         plant.get_info()
-        if isinstance(plant, Flower):
-            plant.bloom()
-        elif isinstance(plant, Tree):
-            plant.produce_shade()
+        plant.act()
         print()
 
 

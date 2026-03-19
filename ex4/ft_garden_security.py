@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-class Plant:
+class SecurePlant:
     def __init__(self, name: str, height: int, age: int):
         self._name: str = name
         self._height: int = height
@@ -10,14 +10,14 @@ class Plant:
             print_errors(val, "height", "cm")
         else:
             self._height = val
-            print(f"Height updated: {self.get_height()}cm [OK]")
+            print(f"Height updated: {self._height}cm [OK]")
 
     def set_age(self, val: int) -> None:
         if val < 0:
             print_errors(val, "age", "days")
         else:
             self._age = val
-            print(f"Age updated: {self.get_age()} days [OK]")
+            print(f"Age updated: {self._age} days [OK]")
 
     def get_height(self) -> int:
         return self._height
@@ -26,17 +26,17 @@ class Plant:
         return self._age
 
     def get_info(self) -> None:
-        print(f"Current plant: {self._name} ({self.get_height()}cm,"
-              f" {self.get_age()} days)")
+        print(f"Current plant: {self._name} ({self._height}cm,"
+              f" {self._age} days)")
 
 
-def plant_factory(name: str, height: int, age: int) -> Plant:
-    print(f"Plan created: {name}")
-    return Plant(name, height, age)
+def plant_factory(name: str, height: int, age: int) -> SecurePlant:
+    print(f"Plant created: {name}")
+    return SecurePlant(name, height, age)
 
 
 def print_errors(val: int, type: str, aux: str) -> None:
-    print(f"Invalid operation attemped: {type} {val}{aux} [REJECTED]")
+    print(f"Invalid operation attempted: {type} {val}{aux} [REJECTED]")
     print(f"Security: Negative {type} rejected")
 
 
