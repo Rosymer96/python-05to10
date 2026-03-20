@@ -16,6 +16,9 @@ class Plant:
               f"{self.get_height()}cm, {self.get_age()} days",
               end="")
 
+    def act(self) -> None:
+        pass
+
 
 class Flower(Plant):
     def __init__(
