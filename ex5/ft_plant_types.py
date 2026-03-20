@@ -13,8 +13,8 @@ class Plant:
 
     def get_info(self) -> None:
         print(f"{self._name} ({self.__class__.__name__}): "
-              f"{self.get_height()}cm, {self.get_age()} days,",
-              end=" ")
+              f"{self.get_height()}cm, {self.get_age()} days",
+              end="")
 
 
 class Flower(Plant):
@@ -30,11 +30,11 @@ class Flower(Plant):
 
     def get_info(self) -> None:
         super().get_info()
-        print(f"{self._color} color")
+        print(f", {self._color} color")
 
     def bloom(self) -> None:
         print(f"{self._name} is blooming beautifully!")
-    
+
     def act(self) -> None:
         self.bloom()
 
@@ -54,7 +54,7 @@ class Tree(Plant):
 
     def get_info(self) -> None:
         super().get_info()
-        print(f"{self._trunk_diameter}cm diameter")
+        print(f", {self._trunk_diameter}cm diameter")
 
     def produce_shade(self) -> None:
         print(f"{self._name} provides {self._shade} "
@@ -79,7 +79,7 @@ class Vegetable(Plant):
 
     def get_info(self) -> None:
         super().get_info()
-        print(f"{self._harvest_season} harvest")
+        print(f", {self._harvest_season} harvest")
 
     def act(self) -> None:
         print(f"{self._name} is rich in {self._nutritional_value}")
