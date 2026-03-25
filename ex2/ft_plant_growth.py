@@ -5,15 +5,15 @@ class Plant:
         self.height: float = height
         self.days: int = days
 
+    def show(self) -> None:
+        print(f"{self.name}: {self.height}cm, {self.days} days old")
+
     def grow(self, amount: int) -> None:
         self.height += amount
         self.height = round(self.height, 1)
 
     def age(self, days: int) -> None:
         self.days += days
-
-    def get_info(self) -> None:
-        print(f"{self.name}: {self.height}cm, {self.days} days old")
 
 
 def main() -> None:
@@ -22,11 +22,11 @@ def main() -> None:
     for plant in garden:
         for i in range(1, week_days):
             print(f"=== Day {i} ===")
-            plant.get_info()
+            plant.show()
             plant.grow(0.8)
             plant.age(1)
         print("=== Day 7 ===")
-        plant.get_info()
+        plant.show()
     print("Growth this week: +6cm")
 
 

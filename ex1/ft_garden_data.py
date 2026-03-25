@@ -5,7 +5,7 @@ class Plant:
         self.height: int = height
         self.days: int = days
 
-    def print_info(self) -> None:
+    def show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.days} days old")
 
 
@@ -14,7 +14,7 @@ def main() -> None:
               (Plant("Cactus", 15, 120))]
     print("=== Garden Plant Registry ===")
     for plant in garden:
-        plant.print_info()
+        plant.show()
 
 
 if __name__ == "__main__":
