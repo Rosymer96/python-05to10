@@ -14,30 +14,30 @@ This project is a series of exercises designed to progressively teach **object-o
 ### Exercise 1: Plant Class and Object Instantiation (`ex1/ft_garden_data.py`)
 - Introduces the `Plant` class.
 - Implements methods to display plant information.
-- Demonstrates creating multiple objects and storing them in a list.
 
 ### Exercise 2: Plant Growth and Aging (`ex2/ft_plant_growth.py`)
-- Adds methods to modify plant attributes: `grow()` and `age()`.
-- Demonstrates mutability and state changes of objects over time.
+- Adds behavioral methods to modify object state: grow() and age().
+- Simulates state changes over a period of time (a week of growth).
 
 ### Exercise 3: Plant Factory (`ex3/ft_plant_factory.py`)
-- Implements a factory function to create multiple plants efficiently.
-- Demonstrates using tuples and iteration to generate objects dynamically.
+- Focuses on streamlining object creation using the __init__ constructor.
+- Enables initializing multiple plants with specific data (name, height, age) at the moment of instantiation.
 
 ### Exercise 4: SecurePlant – Encapsulation (`ex4/ft_garden_security.py`)
-- Introduces protected attributes (`_height`, `_age`).
-- Provides safe getter and setter methods with validation.
-- Demonstrates encapsulation and error handling for invalid data.
+- Introduces Encapsulation using protected attributes (_height, _age).
+- Implements safe Getters and Setters with data validation to prevent negative values .
 
 ### Exercise 5: Specialized Plant Types (`ex5/ft_plant_types.py`)
 - Implements inheritance: `Plant` → `Flower`, `Tree`, `Vegetable`.
 - Each subclass adds unique attributes and behaviors.
-- Demonstrates **polymorphism** with the `act()` method.
+- Demonstrates Method Overriding using super() to extend base functionality (e.g., adding color to flowers or trunk diameter to trees)
+
 
 ### Exercise 6: Garden Analytics (`ex6/ft_garden_analytics.py`)
-- Implements `GardenManager` to handle multiple gardens (Alice, Bob, etc.).
-- Includes `@classmethod` for global states and `@staticmethod` for utilities.
-- Tracks growth, counts plant types, and validates system-wide data.
+- Implements Nested Classes: A Stats class inside Plant to track calls to grow, age, and show.
+- Uses Static Methods (@staticmethod) for utility checks (e.g., is_older_than_year).
+- Uses Class Methods (@classmethod) for factory patterns like creating anonymous plants.
+- Extends the hierarchy with a Seed class inheriting from Flower.
 
 ---
 
