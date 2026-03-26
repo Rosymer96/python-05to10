@@ -1,25 +1,33 @@
 #!/usr/bin/env python3
-class SecurePlant:
-    def __init__(self, name: str, height: float, age: int):
-        self._name: str = name
-        self._height: float = height
-        self._age: int = age
+class Plant:
+    def __init__(self, name: str, height: float, age: int) -> None:
+        self.name: str = name
+        self._height: float = 0.0
+        self._age: int = 0
+        self.set_height(height, False)
+        self.set_age(age, False)
 
-    def set_height(self, val: float) -> None:
+    def show(self) -> None:
+        print(f"{self.name}: {self._height:.1f}cm, {self._age}"
+              f" days old")
+
+    def set_height(self, val: float, print_set: bool = True) -> None:
         if val < 0:
-            print(f"{self._name}: Error, height can't be negative")
+            print(f"{self.name}: Error, height can't be negative")
             print("Height update rejected")
         else:
             self._height = val
-            print(f"Height updated: {self._height}cm")
+            if print_set:
+                print(f"Height updated: {self._height}cm")
 
-    def set_age(self, val: int) -> None:
+    def set_age(self, val: int, print_set: bool = True) -> None:
         if val < 0:
-            print(f"{self._name}: Error, age can't be negative")
-            print("Age updated rejected")
+            print(f"{self.name}: Error, age can't be negative")
+            print("Age update rejected")
         else:
             self._age = val
-            print(f"Age updated: {self._age} days")
+            if print_set:
+                print(f"Age updated: {self._age} days")
 
     def get_height(self) -> float:
         return self._height
@@ -27,15 +35,16 @@ class SecurePlant:
     def get_age(self) -> int:
         return self._age
 
-    def get_info(self) -> None:
-        print(f"Current state: {self._name}: {round(float(self._height), 1)}"
-              f"cm, {self._age} days old")
+    def current_state(self) -> None:
+        print("Current state: ", end="")
+        self.show()
 
 
-def plant_factory(name: str, height: int, age: int) -> SecurePlant:
-    print(f"Plant created: {name}: {round(float(height), 1)}cm, "
-          f"{age} days old")
-    return SecurePlant(name, height, age)
+def plant_factory(name: str, height: int, age: int) -> Plant:
+    new_plant = Plant(name, height, age)
+    print("Plant created: ", end="")
+    new_plant.show()
+    return new_plant
 
 
 def main() -> None:
@@ -48,7 +57,7 @@ def main() -> None:
     rose.set_height(-5)
     rose.set_age(-10)
     print()
-    rose.get_info()
+    rose.current_state()
 
 
 if __name__ == "__main__":
