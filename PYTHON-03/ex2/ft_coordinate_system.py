@@ -1,7 +1,8 @@
+#!/usr/bin/env python3
 import math
 
 
-def get_player_pos():
+def get_player_pos() -> tuple[float, float, float]:
     while True:
         try:
             line = input("Enter new coordinates as floats in format 'x,y,z': ")
@@ -17,9 +18,9 @@ def get_player_pos():
         except ValueError as e:
             for p in parts:
                 try:
-                    float(p)
+                    float(p.strip())
                 except ValueError:
-                    print(f"Error on parameter '{p}': {e}")
+                    print(f"Error on parameter '{p.strip()}': {e}")
                     break
             continue
 
@@ -33,7 +34,7 @@ def calculate_distance(p1: tuple[float, float, float],
     )
 
 
-def main():
+def main() -> None:
     print("=== Game Coordinate System ===")
     # Primera captura
     print("Get a first set of coordinates")
