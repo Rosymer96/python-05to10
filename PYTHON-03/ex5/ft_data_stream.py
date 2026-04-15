@@ -29,7 +29,9 @@ def main() -> None:
         name, action = next(gen)
         print(f"Event {i}: Player {name} did action {action}")
 
-    events_list = [next(gen) for _ in range(10)]
+    events_list = []
+    for _ in range(10):
+        events_list.append(next(gen))
     print()
     print(f"Built list of 10 events: {events_list}")
     print()
