@@ -3,7 +3,6 @@ import sys
 
 
 def ft_inventory_system(args: list) -> None:
-    print("=== Inventory System Analysis ===")
     items = {}
     for arg in args:
         try:
@@ -19,15 +18,16 @@ def ft_inventory_system(args: list) -> None:
                 items[key] = val
             except ValueError as e:
                 print(f"Quantity error for '{key}': {e}")
-    print(f"Got inventory: {items}")
-    item_list = list(items.keys())
-    print(f"Item list: {item_list}")
     total = sum(items.values())
-    print(f"Total quantity of the {len(item_list)} items: "
-          f"{total}")
     if total == 0:
-        print("Inventory is empty")
+        return
     else:
+        print("=== Inventory System Analysis ===")
+        print(f"Got inventory: {items}")
+        item_list = list(items.keys())
+        print(f"Item list: {item_list}")
+        print(f"Total quantity of the {len(item_list)} items: "
+              f"{total}")
         for key in items:
             value = items[key]
             percent = (value / total) * 100
