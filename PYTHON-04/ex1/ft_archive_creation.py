@@ -1,14 +1,18 @@
+#!/usr/bin/env python3
 import sys
 from typing import IO
 
 
-def ft_read_text(f: IO) -> str:
+def ft_read_text(f: IO[str]) -> str:
     content = f.read()
-    print(f"---\n\n{content}\n---")
+    print("---\n")
+    print(f"{content}")
+    print("\n---")
     return content
 
-def main(args: list) -> None:
-    if len(args) == 1:
+
+def main(args: list[str]) -> None:
+    if len(args) != 2:
         print(f"Usage: {args[0]} <file>")
         return
     else:
@@ -20,12 +24,32 @@ def main(args: list) -> None:
             print(f"Error opening file '{args[1]}': {e}")
             return
         content = ft_read_text(opened)
-        lines = content.split('\n')
-        for line in lines:
-            line = line.append('#\n')
-            print(line)
         opened.close()
         print(f"File '{args[1]}' closed.")
+
+        print("\nTransform data:")
+        print("---\n")
+        lines = content.split('\n')
+        new_content = ""
+        for line in lines:
+            if line != "":
+                new_content += line + "#\n"
+        print(new_content)
+        print("---")
+
+        file_name = input("Enter new file name (or empty): ")
+        if file_name == "":
+            print("Not saving data.")
+        else:
+            print(f"Saving data to '{file_name}'")
+            try:
+                new_file = open(file_name, 'w')
+                new_file.write(new_content)
+                new_file.close()
+                print(f"Data saved in file '{file_name}'.")
+            except (FileNotFoundError, PermissionError,
+                    IsADirectoryError) as e:
+                print(f"Error opening file '{file_name}': {e}")
 
 
 if __name__ == "__main__":

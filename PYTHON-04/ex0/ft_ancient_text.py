@@ -1,14 +1,17 @@
+#!/usr/bin/env python3
 import sys
 from typing import IO
 
 
-def ft_read_text(f: IO) -> None:
+def ft_read_text(f: IO[str]) -> None:
     content = f.read()
-    print(f"---\n\n{content}\n---")
+    print("---\n")
+    print(f"{content}")
+    print("\n---")
 
 
-def main(args: list) -> None:
-    if len(args) == 1:
+def main(args: list[str]) -> None:
+    if len(args) != 2:
         print(f"Usage: {args[0]} <file>")
         return
     else:
