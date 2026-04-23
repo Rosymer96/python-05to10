@@ -104,7 +104,8 @@ def main() -> None:
     print("Trying to validate input '42':", num.validate(42))
     print("Trying to validate input 'Hello':", num.validate("Hello"))
     try:
-        print("Test invalid ingestion of string 'foo' without prior validation:")
+        print(
+            "Test invalid ingestion of string 'foo' without prior validation:")
         num.ingest("foo")
     except Exception as e:
         print("Got exception:", e)
