@@ -35,7 +35,7 @@ class NumericProcessor(DataProcessor):
             return all(isinstance(x, (int, float)) for x in data)
         return False
 
-    def ingest(self, data: int | float | list[int | float]) -> None:
+    def ingest(self, data: Any) -> None:
         if not self.validate(data):
             raise ValueError("Improper numeric data")
         if isinstance(data, list):
@@ -55,7 +55,7 @@ class TextProcessor(DataProcessor):
             return all(isinstance(x, str) for x in data)
         return False
 
-    def ingest(self, data: str | list[str]) -> None:
+    def ingest(self, data: Any) -> None:
         if not self.validate(data):
             raise ValueError("Improper text data")
         if isinstance(data, list):
@@ -82,7 +82,7 @@ class LogProcessor(DataProcessor):
             return all(is_valid_dict(x) for x in data)
         return False
 
-    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
+    def ingest(self, data: Any) -> None:
         if not self.validate(data):
             raise ValueError("Improper log data")
 
