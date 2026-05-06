@@ -9,9 +9,9 @@ class ExportPlugin(Protocol):
         pass
 
 
-class CVSExport:
+class CSVExport:
     def process_output(self, data: list[tuple[int, str]]) -> None:
-        print("CVS Output:")
+        print("CSV Output:")
         values = [value for _, value in data]
         print(",".join(values))
 
@@ -194,8 +194,8 @@ def main() -> None:
 
     print("Send 3 processed data from each processor to a CSV plugin:")
 
-    cvs_plugin = CVSExport()
-    data_stream.output_pipeline(3, cvs_plugin)
+    csv_plugin = CSVExport()
+    data_stream.output_pipeline(3, csv_plugin)
     print()
     data_stream.print_processors_stats()
 
