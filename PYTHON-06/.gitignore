@@ -1,0 +1,19 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# mypy cache (si usas mypy)
+.mypy_cache/
+
+# coverage / tooling caches (opcional)
+.pytest_cache/
+.coverage
+
+# environment / venv (opcional)
+venv/
+env/
+.venv/
+
+# system files
+.DS_Store
