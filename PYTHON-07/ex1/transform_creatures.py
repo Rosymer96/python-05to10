@@ -13,11 +13,11 @@ class Shiftling(Creature, TransformCapability):
         return "Shiftling attacks normally."
 
     def transform(self) -> str:
-        self.transform = True
+        self.transformed = True
         return "Shiftling shifts into a sharper form!"
 
     def revert(self) -> str:
-        self.transform = False
+        self.transformed = False
         return "Shiftling returns to normal."
 
 
@@ -36,5 +36,5 @@ class Morphagon(Creature, TransformCapability):
         return "Morphagon morphs into a dragonic battle form!"
 
     def revert(self) -> str:
-        self.transform = False
+        self.transformed = False
         return "Morphagon stabilizes its form."

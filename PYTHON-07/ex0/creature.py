@@ -10,7 +10,7 @@ class Creature(ABC):
         return f"{self._name} is a {self._creature_type} type Creature"
 
     @abstractmethod
-    def attack(self) -> None:
+    def attack(self) -> str:
         pass
 
 
