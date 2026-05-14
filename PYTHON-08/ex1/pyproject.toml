@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "matrix-loading"
+version = "0.1.0"
+description = "Matrix dependency loader"
+authors = ["rosvela"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "*"
+pandas = "*"
+matplotlib = "*"
+requests = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
