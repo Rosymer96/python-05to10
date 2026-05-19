@@ -22,8 +22,8 @@ def main() -> None:
         print("the global system.")
         print()
         print("Package installation path:")
-        for sitepackages in site.getsitepackages():
-            print(sitepackages)
+        for sitepackage in site.getsitepackages():
+            print(sitepackage)
     else:
         print("\nMATRIX STATUS: You're still plugged in\n")
         print(f"Current Python: {current_python}")

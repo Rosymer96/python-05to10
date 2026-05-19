@@ -34,6 +34,9 @@ def check_dependencies() -> bool:
 
 
 def print_installed_help() -> None:
+    print("\nDependency Management:")
+    print("pip -> uses requirements.txt")
+    print("Poetry -> uses pyproject.toml and isolated dependency resolution")
     print("\nInstall dependencies with:")
     print("pip install -r requirements.txt")
     print("\nOr with Poetry:")
@@ -53,14 +56,6 @@ def analyze_data() -> None:
     print("\nAnalyzing Matrix data...")
     print(f"Processing {len(matrix_data)} data points...")
     dataframe = pd.DataFrame({"matrix_signal": matrix_data})
-    mean_value = dataframe["matrix_signal"].mean()
-    min_value = dataframe["matrix_signal"].min()
-    max_value = dataframe["matrix_signal"].max()
-
-    print("\nStatistics:")
-    print(f"Mean: {mean_value:.2f}")
-    print(f"Min: {min_value:.2f}")
-    print(f"Max: {max_value:.2f}")
 
     print("\nGenerating visualization...")
 
@@ -73,7 +68,7 @@ def analyze_data() -> None:
     output_file = "matrix_analysis.png"
 
     plt.savefig(output_file)
-
+    plt.close()
     print("\nAnalysis complete!")
     print(f"Results saved to: {output_file}")
 
@@ -85,7 +80,7 @@ def main() -> None:
             sys.exit(1)
         analyze_data()
 
-    except Exception as error:
+    except RuntimeError as error:
         print(f"Unexpected error: {error}")
         sys.exit(1)
 
