@@ -29,7 +29,7 @@ def load_configuration() -> dict[str, str]:
             config[var] = "NOT SET"
         else:
             config[var] = value
-
+    print()
     return config
 
 
@@ -72,22 +72,23 @@ def security_check() -> None:
 
     print("Environment security check:")
 
-    if os.path.exists(".env"):
-        print("[OK] .env file properly configured")
-    else:
-        print("[WARNING] .env file missing")
-
     if os.path.exists(".gitignore"):
         with open(".gitignore", "r", encoding="utf-8") as file:
             content = file.read()
 
         if ".env" in content:
-            print("[OK] Production overrides available")
             print("[OK] No hardcoded secrets detected")
         else:
             print("[WARNING] .env missing from .gitignore")
     else:
         print("[WARNING] .gitignore file missing")
+
+    if os.path.exists(".env"):
+        print("[OK] .env file properly configured")
+    else:
+        print("[WARNING] .env file missing")
+
+    print("[OK] Production overrides available")
     print()
     print("The Oracle sees all configurations.")
 
