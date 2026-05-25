@@ -1,6 +1,8 @@
 from pydantic import BaseModel, model_validator, Field, ValidationError
 from datetime import datetime
 from enum import Enum
+import csv
+import json
 
 
 class ContactType(str, Enum):
@@ -95,6 +97,32 @@ def main() -> None:
     except (ValidationError) as e:
         for error in e.errors():
             print(f"{error['msg']}")
+
+    print("\n======================================")
+    print("Valid contact report:")
+    with open("../generated_data/alien_contacts.csv") as file:
+        aliens = csv.DictReader(file)
+        for alien in aliens:
+            try:
+                new_alien = AlienContact.model_validate(alien)
+                print_contact_info(new_alien)
+
+            except (ValidationError) as e:
+                for error in e.errors():
+                    print(f"{error['msg']}")
+
+    print("\n========================================")
+    print("Expected validation error:")
+    with open("../generated_data/invalid_contacts.json", "r") as invalid_file:
+        invalid_aliens = json.load(invalid_file)
+        for alien in invalid_aliens:
+            try:
+                new_alien = AlienContact.model_validate(alien)
+                print_contact_info(new_alien)
+
+            except (ValidationError) as e:
+                for error in e.errors():
+                    print(f"{error['msg']}")
 
 
 if __name__ == "__main__":
