@@ -1,4 +1,5 @@
 from pydantic import BaseModel, model_validator, Field, ValidationError
+from pathlib import Path
 from datetime import datetime
 from enum import Enum
 import csv
@@ -98,31 +99,34 @@ def main() -> None:
         for error in e.errors():
             print(f"{error['msg']}")
 
-    print("\n======================================")
-    print("Valid contact report:")
-    with open("../generated_data/alien_contacts.csv") as file:
-        aliens = csv.DictReader(file)
-        for alien in aliens:
-            try:
-                new_alien = AlienContact.model_validate(alien)
-                print_contact_info(new_alien)
+    generated_data_path = Path("../generated_data")
 
-            except (ValidationError) as e:
-                for error in e.errors():
-                    print(f"{error['msg']}")
+    if generated_data_path.exists() and generated_data_path.is_dir():
+        print("\n======================================")
+        print("Valid contact report:")
+        with open("../generated_data/alien_contacts.csv") as file:
+            aliens = csv.DictReader(file)
+            for alien in aliens:
+                try:
+                    new_alien = AlienContact.model_validate(alien)
+                    print_contact_info(new_alien)
 
-    print("\n========================================")
-    print("Expected validation error:")
-    with open("../generated_data/invalid_contacts.json", "r") as invalid_file:
-        invalid_aliens = json.load(invalid_file)
-        for alien in invalid_aliens:
-            try:
-                new_alien = AlienContact.model_validate(alien)
-                print_contact_info(new_alien)
+                except (ValidationError) as e:
+                    for error in e.errors():
+                        print(f"{error['msg']}")
 
-            except (ValidationError) as e:
-                for error in e.errors():
-                    print(f"{error['msg']}")
+        print("\n========================================")
+        print("Expected validation error:")
+        with open("../generated_data/invalid_contacts.json", "r") as inv_file:
+            invalid_aliens = json.load(inv_file)
+            for alien in invalid_aliens:
+                try:
+                    new_alien = AlienContact.model_validate(alien)
+                    print_contact_info(new_alien)
+
+                except (ValidationError) as e:
+                    for error in e.errors():
+                        print(f"{error['msg']}")
 
 
 if __name__ == "__main__":
