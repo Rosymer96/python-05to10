@@ -3,6 +3,7 @@ from datetime import datetime
 
 
 class SpaceStation(BaseModel):
+    """Model to validate space station information."""
     station_id: str = Field(min_length=3, max_length=10)
     name: str = Field(min_length=1, max_length=50)
     crew_size: int = Field(ge=1, le=20)
@@ -14,6 +15,7 @@ class SpaceStation(BaseModel):
 
 
 def print_station_info(s: SpaceStation) -> None:
+    """Display formatted space station information."""
     print(f"ID: {s.station_id}")
     print(f"Name: {s.name}")
     print(f"Crew: {s.crew_size} people")
@@ -27,6 +29,7 @@ def print_station_info(s: SpaceStation) -> None:
 
 
 def main() -> None:
+    """Demonstrate valid and invalid station validation."""
     print("Space Station Data Validation")
     print("========================================")
     print("Valid station created:")

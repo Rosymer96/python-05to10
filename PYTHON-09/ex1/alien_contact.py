@@ -7,6 +7,7 @@ import json
 
 
 class ContactType(str, Enum):
+    """Available alien contact types."""
     RADIO = "radio"
     VISUAL = "visual"
     PHYSICAL = "physical"
@@ -14,6 +15,7 @@ class ContactType(str, Enum):
 
 
 class AlienContact(BaseModel):
+    """Model to validate alien contact reports."""
     contact_id: str = Field(min_length=5, max_length=15)
     timestamp: datetime
     location: str = Field(min_length=3, max_length=100)
@@ -26,6 +28,7 @@ class AlienContact(BaseModel):
 
     @model_validator(mode='after')
     def validate_contact_rules(self) -> 'AlienContact':
+        """Validate business rules for alien contacts."""
         if not self.contact_id.startswith("AC"):
             raise ValueError(
                 "Contact ID must start with 'AC'"
@@ -53,6 +56,7 @@ class AlienContact(BaseModel):
 
 
 def print_contact_info(a: AlienContact) -> None:
+    """Display formatted alien contact information."""
     print(f"ID: {a.contact_id}")
     print(f"Type: {a.contact_type.value}")
     print(f"Location: {a.location}")
@@ -64,6 +68,7 @@ def print_contact_info(a: AlienContact) -> None:
 
 
 def main() -> None:
+    """Demonstrate valid and invalid contact validation."""
     print("Alien Contact Log Validation")
     print("======================================")
     print("Valid contact report:")

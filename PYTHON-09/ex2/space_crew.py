@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field, ValidationError, model_validator
 
 
 class Rank(str, Enum):
+    """Available crew ranks."""
     CADET = "cadet"
     OFFICER = "officer"
     LIEUTENANT = "lieutenant"
@@ -12,6 +13,7 @@ class Rank(str, Enum):
 
 
 class CrewMember(BaseModel):
+    """Model representing an individual crew member."""
     member_id: str = Field(min_length=3, max_length=10)
     name: str = Field(min_length=2, max_length=50)
     rank: Rank
@@ -22,6 +24,7 @@ class CrewMember(BaseModel):
 
 
 class SpaceMission(BaseModel):
+    """Model to validate space mission requirements."""
     mission_id: str = Field(min_length=5, max_length=15)
     mission_name: str = Field(min_length=3, max_length=100)
     destination: str = Field(min_length=3, max_length=50)
@@ -33,6 +36,7 @@ class SpaceMission(BaseModel):
 
     @model_validator(mode='after')
     def validate_mission_rules(self) -> 'SpaceMission':
+        """Validate mission safety and crew requirements."""
         if not self.mission_id.startswith("M"):
             raise ValueError(
                 "Mission ID must start with 'M'"
@@ -65,6 +69,7 @@ class SpaceMission(BaseModel):
 
 
 def print_mission_info(m: SpaceMission) -> None:
+    """Display formatted mission information."""
     print(f"Mission: {m.mission_name}")
     print(f"ID: {m.mission_id}")
     print(f"Destination: {m.destination}")
@@ -79,6 +84,7 @@ def print_mission_info(m: SpaceMission) -> None:
 
 
 def main() -> None:
+    """Demonstrate valid and invalid mission validation."""
     print("Space Mission Crew Validation")
     print("=========================================")
     print("Valid mission created:")
