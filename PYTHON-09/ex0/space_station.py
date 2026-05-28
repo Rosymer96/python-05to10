@@ -4,12 +4,12 @@ from datetime import datetime
 
 class SpaceStation(BaseModel):
     """Model to validate space station information."""
-    station_id: str = Field(min_length=3, max_length=10)
-    name: str = Field(min_length=1, max_length=50)
-    crew_size: int = Field(ge=1, le=20)
-    power_level: float = Field(ge=0.0, le=100.0)
-    oxygen_level: float = Field(ge=0.0, le=100.0)
-    last_maintenance: datetime
+    station_id: str = Field(..., min_length=3, max_length=10)
+    name: str = Field(..., min_length=1, max_length=50)
+    crew_size: int = Field(..., ge=1, le=20)
+    power_level: float = Field(..., ge=0.0, le=100.0)
+    oxygen_level: float = Field(..., ge=0.0, le=100.0)
+    last_maintenance: datetime = ...
     is_operational: bool = Field(default=True)
     notes: str | None = Field(default=None, max_length=200)
 
@@ -21,6 +21,7 @@ def print_station_info(s: SpaceStation) -> None:
     print(f"Crew: {s.crew_size} people")
     print(f"Power: {s.power_level}%")
     print(f"Oxygen: {s.oxygen_level}%")
+    print(f"Last maintenance: {s.last_maintenance}")
     print(f"Status: "
           f"{'Operational' if s.is_operational else 'Not Operational'}")
     if s.notes:
@@ -40,7 +41,7 @@ def main() -> None:
             crew_size=6,
             power_level=85.5,
             oxygen_level=92.3,
-            last_maintenance=datetime.now(),
+            last_maintenance="2023-07-11T00:00:00"
         )
         print_station_info(valid_station)
     except ValidationError as e:

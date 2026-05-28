@@ -16,13 +16,13 @@ class ContactType(str, Enum):
 
 class AlienContact(BaseModel):
     """Model to validate alien contact reports."""
-    contact_id: str = Field(min_length=5, max_length=15)
-    timestamp: datetime
-    location: str = Field(min_length=3, max_length=100)
-    contact_type: ContactType
-    signal_strength: float = Field(ge=0.0, le=10.0)
-    duration_minutes: int = Field(ge=1, le=1440)
-    witness_count: int = Field(ge=1, le=100)
+    contact_id: str = Field(..., min_length=5, max_length=15)
+    timestamp: datetime = ...
+    location: str = Field(..., min_length=3, max_length=100)
+    contact_type: ContactType = ...
+    signal_strength: float = Field(..., ge=0.0, le=10.0)
+    duration_minutes: int = Field(..., ge=1, le=1440)
+    witness_count: int = Field(..., ge=1, le=100)
     message_received: str | None = Field(default=None, max_length=500)
     is_verified: bool = Field(default=False)
 
@@ -38,7 +38,7 @@ class AlienContact(BaseModel):
             and not self.is_verified
                 ):
             raise ValueError(
-                "Physical contacts report must be verified"
+                "Physical contact reports must be verified"
             )
         if (
             self.contact_type == ContactType.TELEPATHIC
@@ -50,7 +50,7 @@ class AlienContact(BaseModel):
                 )
         if (self.signal_strength > 7.0 and not self.message_received):
             raise ValueError(
-                "Strong signals highter than 7.0 must have a message received"
+                "Strong signals higher than 7.0 must have a message received"
                 )
         return self
 
@@ -63,7 +63,10 @@ def print_contact_info(a: AlienContact) -> None:
     print(f"Signal: {a.signal_strength:.1f}/10")
     print(f"Duration: {a.duration_minutes} minutes")
     print(f"Witnesses: {a.witness_count}")
-    print(f"Message: '{a.message_received}'")
+    if a.message_received:
+        print(f"Message: '{a.message_received}'")
+    else:
+        print("Message: No message registered.")
     print()
 
 
@@ -81,7 +84,7 @@ def main() -> None:
             signal_strength=8.5,
             duration_minutes=45,
             witness_count=5,
-            message_received="Greetings from Zeta Reticuli",
+            message_received="Hello word!"
         )
         print_contact_info(valid_contact)
 
