@@ -1,8 +1,16 @@
-def artifact_sorter(artifacts: list[dict]) -> list[dict]:
-    return list(sorted(artifacts, key=lambda x: x['power'], reverse=True))
+from typing import Any
 
 
-def power_filter(mages: list[dict], min_power: int) -> list[dict]:
+def artifact_sorter(
+        artifacts: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    return sorted(artifacts, key=lambda x: x['power'], reverse=True)
+
+
+def power_filter(
+        mages: list[dict[str, Any]],
+        min_power: int
+) -> list[dict[str, Any]]:
     return list(filter(lambda x: x['power'] >= min_power, mages))
 
 
@@ -10,7 +18,7 @@ def spell_transformer(spells: list[str]) -> list[str]:
     return list(map(lambda x: "* " + x + " *", spells))
 
 
-def mage_stats(mages: list[dict]) -> dict:
+def mage_stats(mages: list[dict[str, Any]]) -> dict[str, int]:
     max_power = max(mages, key=lambda x: x['power'])['power']
     min_power = min(mages, key=lambda x: x['power'])['power']
     avg_power = sum(map(lambda x: x['power'], mages))/len(mages)
@@ -36,12 +44,12 @@ def main() -> None:
     spells = ['lightning', 'earthquake', 'meteor', 'fireball']
 
     print("\nTesting artifact sorter...")
-    sorted = artifact_sorter(artifacts)
-    for i, x in enumerate(sorted):
-        if i < len(sorted) - 1:
+    sorted_artifacts = artifact_sorter(artifacts)
+    for i, x in enumerate(sorted_artifacts):
+        if i < len(sorted_artifacts) - 1:
             print(f"{x['name']} ({x['power']} power)", end=" ")
-            print(f"comes before {sorted[i + 1]['name']} "
-                  f"({sorted[i + 1]['power']} power)")
+            print(f"comes before {sorted_artifacts[i + 1]['name']} "
+                  f"({sorted_artifacts[i + 1]['power']} power)")
 
     print("\nTesting power filter...")
     powers_filtered = power_filter(mages, 55)
@@ -50,7 +58,7 @@ def main() -> None:
 
     print("\nTesting spell transformer...")
     spell_transformed = spell_transformer(spells)
-    print(" ".join([x for x in spell_transformed]))
+    print(" ".join(spell_transformed))
 
     print("\nTesting mage stats...")
     print(mage_stats(mages))
